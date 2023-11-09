@@ -3,6 +3,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { CardContent } from "../ui/card";
 
 const providers = [
   {
@@ -25,9 +26,9 @@ export default function LoginProviders() {
   };
 
   return (
-    <div>
+    <CardContent className="grid grid-cols-2 gap-6">
       {providers.map(({ providerName, Icon }) => (
-        <Button className="bg-white rounded-full p-1" key={providerName} onClick={handleOAuthSignIn(providerName)}>
+        <Button variant={"outline"} key={providerName} onClick={handleOAuthSignIn(providerName)}>
           <strong className="capitalize">{providerName}</strong>
         </Button>
 
@@ -35,6 +36,6 @@ export default function LoginProviders() {
         //   Sign in with {name}
         // </Button>
       ))}
-    </div>
+    </CardContent>
   );
 }

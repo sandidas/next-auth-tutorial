@@ -18,17 +18,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang="en">
-      <body className="max-w-screen-2xl px-7 md:px-10 mx-auto">
+      <body className="bg-slate-200">
         <SessionProvider>
           <NavigationMenubar />
-          <div className="flex gap-1">
-            {!!session && <Logout />}
-
-            {!session && <Login />}
-            <Link href={"/"}>Home</Link>
-          </div>
-
           {children}
+
+          {/* <main className="max-w-screen-2xl px-7 md:px-10 mx-auto"></main> */}
           {/* React Hot Toast */}
           <ToasterContext />
         </SessionProvider>

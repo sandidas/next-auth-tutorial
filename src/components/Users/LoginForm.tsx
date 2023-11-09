@@ -5,10 +5,10 @@ import { Button } from "@/components/ui/button";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { toast } from "react-hot-toast";
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from "next/navigation";
+import { Label } from "@/components/ui/label";
 
-
-
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 interface IUserLogin {
   email: string;
   password: string;
@@ -17,9 +17,8 @@ interface IUserLogin {
 export default function LoginForm() {
   //
   const router = useRouter(); // to redirect after login
-  const searchParams = useSearchParams()
-console.log("searchParams", searchParams);
- 
+  const searchParams = useSearchParams();
+  console.log("searchParams", searchParams);
 
   // = = = = = = = = = = =
   // REACT HOOK FORM
@@ -87,22 +86,30 @@ console.log("searchParams", searchParams);
 
   return (
     <div>
-      <form onSubmit={handleSubmit(handleSubmitForm)} className="w-full space-y-5 p-5 xl:p-10">
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 items-center justify-between">
-          <div>
-            <Input type="email" placeholder="Email *" {...register("email")} />
+      <form onSubmit={handleSubmit(handleSubmitForm)}>
+        <CardContent className="grid gap-4">
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+            </div>
+          </div>
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" placeholder="m@example.com" {...register("email")} />
             {errors.email && <span className="text-red-400 text-sm">{`${errors.email?.message}`}</span>}
           </div>
-
-          <div>
-            <Input type="password" placeholder="Password *" {...register("password")} />
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" type="password" placeholder="Password *" {...register("password")} />
             {errors.password && <span className="text-red-400 text-sm">{`${errors.password?.message}`}</span>}
           </div>
-        </div>
-
-        <Button disabled={!isDirty} variant={"outline"} className="mt-5" type="submit">
-          Login Now
-        </Button>
+        </CardContent>
+        <CardFooter>
+          <Button className="w-full">Create account</Button>
+        </CardFooter>
       </form>
     </div>
   );
