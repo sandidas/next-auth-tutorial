@@ -1,9 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Link from "next/link";
 import { getServerSession } from "next-auth";
-import Logout from "@/components/Logout";
-import Login from "@/components/Login";
 import SessionProvider from "@/context/AuthContext";
 import ToasterContext from "@/context/ToasterContext";
 import NavigationMenubar from "@/components/Navigation/NavigationMenubar";

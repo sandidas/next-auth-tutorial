@@ -26,16 +26,23 @@ export default function LoginProviders() {
   };
 
   return (
-    <CardContent className="grid grid-cols-2 gap-6">
-      {providers.map(({ providerName, Icon }) => (
-        <Button variant={"outline"} key={providerName} onClick={handleOAuthSignIn(providerName)}>
-          <strong className="capitalize">{providerName}</strong>
-        </Button>
+    <CardContent className="grid gap-4">
+      <div className="grid grid-cols-2 gap-6">
+        {providers.map(({ providerName, Icon }) => (
+          <Button variant={"outline"} key={providerName} onClick={handleOAuthSignIn(providerName)}>
+            <strong className="capitalize">{providerName}</strong>
+          </Button>
+        ))}
+      </div>
 
-        //   <Button variant="default" component="a" leftIcon={<Icon className="h-5 w-5 fill-white" />} key={name} onClick={async () => signIn(`${name}, undefined`, { prompt: "select_account" })} size="xl" className="my-1">
-        //   Sign in with {name}
-        // </Button>
-      ))}
+      <div className="relative">
+        <div className="absolute inset-0 flex items-center">
+          <span className="w-full border-t" />
+        </div>
+        <div className="relative flex justify-center text-xs uppercase">
+          <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
+        </div>
+      </div>
     </CardContent>
   );
 }

@@ -6,9 +6,9 @@ export default function ToasterContext() {
     <div>
       <Toaster
         reverseOrder={false}
-        position="top-center"
+        position="bottom-right"
         toastOptions={{
-          duration: 45000,
+          duration: 20000,
           style: {},
         }}
       ></Toaster>

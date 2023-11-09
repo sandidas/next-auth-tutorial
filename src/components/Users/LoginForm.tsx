@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 import { useSearchParams } from "next/navigation";
 import { Label } from "@/components/ui/label";
 
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardFooter } from "@/components/ui/card";
 interface IUserLogin {
   email: string;
   password: string;
@@ -59,7 +59,7 @@ export default function LoginForm() {
 
   const handleSubmitForm = async (data: IUserLogin) => {
     // Loading toaster
-    const loadingToast = toast.loading("Waiting...");
+    const loadingToast = toast.loading("Processing...");
     // console.log("Data", data);
     try {
       const response = await signIn("credentials", {
@@ -88,14 +88,6 @@ export default function LoginForm() {
     <div>
       <form onSubmit={handleSubmit(handleSubmitForm)}>
         <CardContent className="grid gap-4">
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t" />
-            </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-background px-2 text-muted-foreground">Or continue with</span>
-            </div>
-          </div>
           <div className="grid gap-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" placeholder="m@example.com" {...register("email")} />
@@ -108,7 +100,7 @@ export default function LoginForm() {
           </div>
         </CardContent>
         <CardFooter>
-          <Button className="w-full">Create account</Button>
+          <Button className="w-full">Login Now</Button>
         </CardFooter>
       </form>
     </div>

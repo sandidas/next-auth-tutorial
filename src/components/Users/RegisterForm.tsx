@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { CardContent, CardFooter } from "../ui/card";
+import { Label } from "../ui/label";
 interface IUserRegister {
   name: string;
   email: string;
@@ -56,14 +58,14 @@ export default function RegisterForm() {
 
   const handleSubmitForm = async (data: IUserRegister) => {
     // console.log("Data", data);
-   const loadingToast = toast.loading("Waiting...");
+    const loadingToast = toast.loading("Processing...");
     try {
       // Loading toaster
 
       const response = await axios.post("/api/users/register", data);
       // Success toaster
       toast.success("Successfully created!");
-      console.log("Register Successful ", response.data);
+      // console.log("Register Successful ", response.data);
     } catch (error: any) {
       // Error toaster
       toast.error(error?.message);
@@ -75,27 +77,30 @@ export default function RegisterForm() {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(handleSubmitForm)} className="w-full space-y-5 p-5 xl:p-10">
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 items-center justify-between">
-          <div>
+      <form onSubmit={handleSubmit(handleSubmitForm)}>
+        <CardContent className="grid gap-4">
+          <div className="grid gap-2">
+            <Label htmlFor="email">Name</Label>
             <Input type="text" placeholder="Name *" {...register("name")} />
             {errors.name && <span className="text-red-400 text-sm">{`${errors.name?.message}`}</span>}
           </div>
 
-          <div>
-            <Input type="email" placeholder="Email *" {...register("email")} />
+          <div className="grid gap-2">
+            <Label htmlFor="email">Email</Label>
+            <Input id="email" placeholder="m@example.com" {...register("email")} />
             {errors.email && <span className="text-red-400 text-sm">{`${errors.email?.message}`}</span>}
           </div>
-
-          <div>
-            <Input type="password" placeholder="Password *" {...register("password")} />
+          <div className="grid gap-2">
+            <Label htmlFor="password">Password</Label>
+            <Input id="password" type="password" placeholder="Password *" {...register("password")} />
             {errors.password && <span className="text-red-400 text-sm">{`${errors.password?.message}`}</span>}
           </div>
-        </div>
-
-        <Button disabled={!isDirty} variant={"outline"} className="mt-5" type="submit">
-          Register Now
-        </Button>
+        </CardContent>
+        <CardFooter>
+          <Button className="w-full" type="submit">
+            Register Now
+          </Button>
+        </CardFooter>
       </form>
     </div>
   );
